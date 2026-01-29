@@ -27,9 +27,11 @@ export default function Header({
           <Bell className="h-5 w-5" />
         </Button>
 
-        <Button variant="ghost" size="icon">
-          <User className="h-5 w-5" />
-        </Button>
+        <Link href="/admin/profile">
+          <Button variant="ghost" size="icon">
+            <User className="h-5 w-5" />
+          </Button>
+        </Link>
       </div>
     </header>
   );
