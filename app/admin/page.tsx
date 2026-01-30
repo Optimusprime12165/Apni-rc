@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Users, Car, FileText, Activity, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
 import {
   Dialog,
   DialogContent,
@@ -132,8 +133,13 @@ export default function AdminDashboard() {
                 <td className="px-4 py-3 text-sm">{u.updated}</td>
 
                 <td className="px-4 py-3 text-center">
-                  <Button size="sm" variant="outline" className="rounded-lg">
-                    History
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="rounded-lg"
+                    asChild
+                  >
+                    <Link href="/admin/history">History</Link>
                   </Button>
                 </td>
 
@@ -212,17 +218,6 @@ export default function AdminDashboard() {
           )}
         </DialogContent>
       </Dialog>
-
-      {/* Floating Logout Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <Button
-          onClick={handleLogout}
-          className="flex items-center gap-2 rounded-full bg-red-600 px-5 py-3 text-white shadow-lg hover:bg-red-700"
-        >
-          <LogOut className="h-4 w-4" />
-          Logout
-        </Button>
-      </div>
     </div>
   );
 }

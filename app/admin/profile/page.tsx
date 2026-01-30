@@ -19,7 +19,7 @@ export default function AdminProfilePage() {
           {/* Avatar */}
           <div className="flex flex-col items-center gap-3">
             <Avatar className="h-24 w-24">
-              <AvatarFallback className="bg-blue-600 text-white text-2xl">
+              <AvatarFallback className="bg-slate-700 text-white text-2xl">
                 A
               </AvatarFallback>
             </Avatar>
@@ -69,7 +69,7 @@ export default function AdminProfilePage() {
 
           <Input placeholder="Confirm New Password" type="password" />
 
-          <Button className="bg-blue-600 hover:bg-blue-700 rounded-xl">
+          <Button className="bg-slate-700 hover:bg-blue-700 rounded-xl">
             Update Password
           </Button>
         </CardContent>

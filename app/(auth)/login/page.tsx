@@ -17,9 +17,9 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
-  /* ---------- DUMMY CREDS ---------- */
-  const DUMMY_MOBILE = "9999999999";
-  const DUMMY_PASSWORD = "admin123";
+  // DUMMY CREDS
+  const ADMIN = { mobile: "9999999999", password: "admin123" };
+  const USER = { mobile: "8888888888", password: "user123" };
 
   const handleLogin = () => {
     setError("");
@@ -29,114 +29,100 @@ export default function LoginPage() {
       return;
     }
 
-    if (mobile === DUMMY_MOBILE && password === DUMMY_PASSWORD) {
-      // fake login success
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          mobile,
-          role: "admin",
-          loggedIn: true,
-        }),
-      );
-
-      router.push("/"); // redirect after login
-    } else {
-      setError("Invalid mobile number or password");
+    // ADMIN LOGIN
+    if (mobile === ADMIN.mobile && password === ADMIN.password) {
+      document.cookie = "role=admin; path=/";
+      router.push("/admin");
+      return;
     }
+
+    // USER LOGIN
+    if (mobile === USER.mobile && password === USER.password) {
+      document.cookie = "role=user; path=/";
+      router.push("/");
+      return;
+    }
+
+    setError("Invalid credentials");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <div className="w-full max-w-md space-y-6">
-        <Card className="shadow-lg rounded-2xl">
-          <CardContent className="p-6 space-y-6">
-            <div className="text-center">
-              <h1 className="text-2xl font-bold text-gray-800">Welcome Back</h1>
-              <p className="text-sm text-gray-500">Login to continue</p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <Card className="w-full max-w-md rounded-2xl shadow-lg">
+        <CardContent className="p-6 space-y-6">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-800">Login</h1>
+            <p className="text-sm text-gray-500">Access your account</p>
+          </div>
+
+          {error && <p className="text-sm text-red-600 text-center">{error}</p>}
+
+          {/* MOBILE */}
+          <div className="space-y-2">
+            <Label>Mobile Number</Label>
+            <div className="relative">
+              <Phone className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Input
+                placeholder="Enter mobile number"
+                className="pl-10 h-11 rounded-xl"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+              />
             </div>
+          </div>
 
-            {/* Error */}
-            {error && (
-              <p className="text-sm text-red-600 text-center">{error}</p>
-            )}
-
-            {/* Mobile Number */}
-            <div className="space-y-2">
-              <Label htmlFor="mobile">Mobile Number</Label>
-              <div className="relative">
-                <Phone className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                <Input
-                  id="mobile"
-                  type="tel"
-                  placeholder="Enter mobile number"
-                  className="pl-10 h-11 rounded-xl"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
-                />
-              </div>
-            </div>
-
-            {/* Password */}
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <div className="relative">
-                <Lock className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter password"
-                  className="pl-10 pr-10 h-11 rounded-xl"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-                >
-                  {showPassword ? (
-                    <EyeOff className="w-4 h-4" />
-                  ) : (
-                    <Eye className="w-4 h-4" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            {/* Forgot */}
-            <div className="text-right">
-              <button className="text-sm text-blue-600 hover:underline">
-                <Link href="/forget-password">Forgot password?</Link>
+          {/* PASSWORD */}
+          <div className="space-y-2">
+            <Label>Password</Label>
+            <div className="relative">
+              <Lock className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter password"
+                className="pl-10 pr-10 h-11 rounded-xl"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                className="absolute right-3 top-1/2 -translate-y-1/2"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <EyeOff className="w-4 h-4 text-gray-400" />
+                ) : (
+                  <Eye className="w-4 h-4 text-gray-400" />
+                )}
               </button>
             </div>
+          </div>
 
-            {/* Login Button */}
-            <Button
-              onClick={handleLogin}
-              className="w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-base font-semibold"
-            >
-              Login
-            </Button>
+          <div className="text-right">
+            <Link href="/forget-password" className="text-sm text-blue-600">
+              Forgot password?
+            </Link>
+          </div>
 
-            {/* Signup */}
-            <p className="text-center text-sm text-gray-600">
-              Don’t have an account?{" "}
-              <Link
-                href="/signup"
-                className="text-blue-600 font-semibold hover:underline"
-              >
-                Sign up
-              </Link>
-            </p>
+          <Button
+            onClick={handleLogin}
+            className="w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-700"
+          >
+            Login
+          </Button>
 
-            {/* Dummy hint */}
-            <p className="text-xs text-gray-400 text-center">
-              Demo Login → 9999999999 / admin123
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+          <p className="text-center text-sm text-gray-600">
+            Don’t have an account?{" "}
+            <Link href="/signup" className="text-blue-600 font-semibold">
+              Sign up
+            </Link>
+          </p>
+
+          <p className="text-xs text-center text-gray-400">
+            Admin → 9999999999 / admin123 <br />
+            User → 8888888888 / user123
+          </p>
+        </CardContent>
+      </Card>
     </div>
   );
 }
