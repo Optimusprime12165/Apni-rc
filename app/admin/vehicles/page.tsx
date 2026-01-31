@@ -22,9 +22,14 @@ const VEHICLES = [
       registrationDate: "12-06-2021",
       rcStatus: "Active",
       address: {
+        plot_no: "ldkmcds",
+        gali_no: "dncd",
+        locality: "dkncdwnck",
+        landmark: "pwodpedew",
         city: "Gurgaon",
         state: "Haryana",
         pincode: "122001",
+        country: "cdmcdk",
       },
     },
   },
@@ -40,9 +45,14 @@ const VEHICLES = [
       registrationDate: "03-11-2020",
       rcStatus: "Active",
       address: {
+        plot_no: "ldkmcds",
+        gali_no: "dncd",
+        locality: "dkncdwnck",
+        landmark: "pwodpedew",
         city: "Jaipur",
         state: "Rajasthan",
         pincode: "302001",
+        country: "cdmcdk",
       },
     },
   },
@@ -138,7 +148,9 @@ export default function VehiclesPage() {
 
               {/* JSON RESPONSE */}
               <div className="rounded-xl border bg-black text-green-400 p-4 max-h-[350px] overflow-auto text-sm">
-                <pre>{JSON.stringify(selectedVehicle.response, null, 2)}</pre>
+                <pre className="whitespace-pre-wrap break-all">
+                  {JSON.stringify(selectedVehicle.response, null, 2)}
+                </pre>
               </div>
 
               {/* CLOSE BUTTON */}

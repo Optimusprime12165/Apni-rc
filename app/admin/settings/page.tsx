@@ -58,6 +58,13 @@ export default function SettingsPage() {
               <Phone className="h-4 w-4 text-slate-500" />
               <span className="text-slate-700">+91 99999 99999</span>
             </div>
+
+            <div className="flex items-center gap-3">
+              <Shield className="h-4 w-4 text-slate-500" />
+              <span className="text-slate-700">
+                Role: <strong>Admin</strong>
+              </span>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -67,7 +74,9 @@ export default function SettingsPage() {
         <CardContent className="p-6 space-y-4">
           <div className="flex items-center gap-3">
             <Shield className="h-5 w-5 text-slate-600" />
-            <h2 className="text-lg font-semibold text-slate-800">Security</h2>
+            <h2 className="text-lg font-semibold text-slate-800">
+              Change Password
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

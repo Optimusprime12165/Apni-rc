@@ -73,10 +73,10 @@ export default function Sidebar({ open }: { open: boolean }) {
           <div className="mt-auto pt-4">
             <Separator className="mb-4" />
             <Link
-              href="/admin/profile"
+              href="/admin/settings"
               className={clsx(
                 "flex items-center gap-3 rounded-lg px-3 py-2 transition",
-                pathname.startsWith("/admin/profile")
+                pathname.startsWith("/admin/settings")
                   ? "bg-blue-50 text-blue-600"
                   : "hover:bg-slate-100",
               )}
